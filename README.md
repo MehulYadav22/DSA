@@ -1,2 +1,1 @@
-# DSA
-In this repositiory I will be sharing some commonly asked DSA programms of linked list.
+In this repository, I will be sharing some commonly asked DSA programs of the linked list.
