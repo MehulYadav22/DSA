@@ -1,0 +1,106 @@
+// In Floyd Cycle Algorithum we intialize two pointers naming slow and fast. In this algorithum we increase the slow pointer once and fast pointer twice.
+// At some point both the slow and fast pointer will meet so that point will be the meeting point. By this we can say that their is a loop present in it.
+// This algorithum is used to check whether loop is present in a linked list or not
+#include<bits/stdc++.h>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node* next;
+
+    //constructor
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+    //destructor
+    ~Node()
+    {
+        int value=this->data;
+        if(this->next!=NULL)
+        {
+            delete next;
+            next=NULL;
+        }
+        cout<<" memory is free for the node with data "<<value<<endl;
+
+    }
+
+};
+void insertAtTail(Node* &tail,Node* &head, int d)
+{
+    if(tail==NULL)
+    {
+        Node* temp=new Node(d);
+        head=temp;
+        tail=temp;
+    }
+    else
+    {
+        //create new node
+    Node* temp= new Node(d);
+    tail ->next=temp;
+    tail= temp;
+    }
+}
+Node* floydDetectLoop(Node* head)
+{
+    if(head==NULL)
+    {
+        return NULL;
+    }
+    Node* slow=head;
+    Node* fast=head;
+    while(slow!=NULL && fast!=NULL)
+    {
+        fast=fast->next;
+        if(fast!=NULL)
+        {
+            fast=fast->next;
+        }
+        slow=slow->next;
+        if(slow==fast)
+        {
+            cout<<"present "<<slow->data<<endl;
+            return slow;
+        }
+    }
+    return NULL;
+}
+
+void print(Node* &head)
+{
+    Node* start=head;
+    while(start!=NULL)
+    {
+        cout<<start->data<<" ";
+        start=start->next;
+    }
+    cout<<endl;
+}
+int main()
+{
+    Node* tail=NULL;
+    Node* head=NULL;
+    insertAtTail(tail,head,5);
+    insertAtTail(tail,head,6);
+    insertAtTail(tail,head,7);
+    insertAtTail(tail,head,8);
+    insertAtTail(tail,head,9);
+    tail->next=head;
+    // print(head);
+    if(floydDetectLoop(head))
+    {
+        cout<<"loop present"<<endl;
+    }
+    else
+    {
+      cout<<"loop is not present"<<endl;
+    }
+
+   
+  
+    
+}
