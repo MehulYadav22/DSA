@@ -1,0 +1,114 @@
+# In this program we have to remove the duplicate elements in the sorted linked list
+//Remove duplicate in a sorted list 
+//T.C=o(n)
+//S.C=o(1)
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    //constructor
+    Node(int data)
+    {
+        this ->data = data;
+        this ->next = NULL;
+    }
+    //destructor
+    // ~Node()
+    // {
+    //     int value=this->data;
+    //     //memory free
+    //     if(this->next!=NULL)
+    //     {
+    //         delete next;
+    //         this->next=NULL;
+    //     }
+    //     cout<<" memory is free for the node with data "<<value<<endl;
+    // }
+};
+void insertAtHead(Node* &head,Node* &tail, int d)
+{
+    //empty list
+    if(head==NULL)
+    {
+        Node* temp=new Node(d);
+        head=temp;
+        tail=temp;
+    }
+    else
+    {
+        // Create new node
+    Node* temp= new Node(d);
+    temp-> next=head;
+    head=temp;
+
+    }
+    
+}
+
+
+
+void insertAtTail(Node* &tail,Node* &head, int d)
+{
+    if(tail==NULL)
+    {
+        Node* temp=new Node(d);
+        head=temp;
+        tail=temp;
+    }
+    else
+    {
+        //create new node
+    Node* temp= new Node(d);
+    tail ->next=temp;
+    tail= temp;
+    }
+}
+Node* removeDuplicate(Node* &head)
+{
+    Node* current=head;
+    while(current!=NULL)
+    {
+        if((current->next!=NULL) && (current->data==current->next->data))
+        {
+            Node* next_Node=current->next->next;
+            Node* nodeToDelete=current->next;
+            delete (nodeToDelete);
+            current->next=next_Node;
+            
+        }
+        else
+        {
+          current=current->next;
+        }
+    }
+    return head;
+}
+
+
+void print(Node* &head)
+{
+    Node* start=head;
+    while(start!=NULL)
+    {
+        cout<< start-> data<<" ";
+        start=start->next;
+    }
+    cout<<endl;
+}
+int main()
+{
+    Node* head=NULL;
+    Node* tail=NULL;
+
+    insertAtTail(tail,head,10);
+    insertAtTail(tail,head,10);
+    insertAtTail(tail,head,20);
+    insertAtTail(tail,head,30);
+    insertAtTail(tail,head,40);
+    print(head);
+    Node* ans=removeDuplicate(head);
+    print(ans);
+}
