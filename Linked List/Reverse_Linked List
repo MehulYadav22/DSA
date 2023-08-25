@@ -1,0 +1,68 @@
+//Reverse singly linked list
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+
+};
+void insertAtHead(Node* &head,int data)
+{
+    if(head==NULL)
+    {
+        Node* temp= new Node(data);
+        head=temp;
+    }
+    else
+    {
+        Node* temp= new Node(data);
+        temp->next=head;
+        head=temp;
+    }
+}
+void print(Node* &head)
+{
+    Node* start=head;
+    while(start!=NULL)
+    {
+        cout<<start->data<<" ";
+        start=start->next;
+    }
+    cout<<endl;
+}
+void reverseLinkedlist(Node* &head)
+{
+    Node* previous=NULL;
+    Node* current=head;
+    Node* forward=NULL;
+    while(current!=NULL)
+    {
+        forward=current->next;
+        current->next=previous;
+        previous=current;
+        current=forward;
+    }
+    head=previous;
+
+}
+int main()
+{
+    Node* head=NULL;
+    insertAtHead(head,10);
+    insertAtHead(head,20);
+    insertAtHead(head,30);
+    insertAtHead(head,40);
+    cout<<"before "<<endl;
+    print(head);
+    cout<<"after "<<endl;
+    reverseLinkedlist(head);
+    print(head);
+
+}
